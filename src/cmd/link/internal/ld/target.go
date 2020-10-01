@@ -162,6 +162,11 @@ func (t *Target) IsSolaris() bool {
 	return t.HeadType == objabi.Hsolaris
 }
 
+func (t *Target) IsHaiku() bool {
+	t.mustSetHeadType()
+	return t.HeadType == objabi.Hhaiku
+}
+
 func (t *Target) IsNetbsd() bool {
 	t.mustSetHeadType()
 	return t.HeadType == objabi.Hnetbsd

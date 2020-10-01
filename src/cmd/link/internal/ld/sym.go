@@ -90,6 +90,16 @@ func (ctxt *Link) computeTLSOffset() {
 		 */
 		ctxt.Tlsoffset = -1 * ctxt.Arch.PtrSize
 
+	case objabi.Hhaiku:
+		switch ctxt.Arch.Family {
+		default:
+			log.Fatalf("unknown thread-local storage offset for haiku/%s", ctxt.Arch.Name)
+		case sys.I386:
+			ctxt.Tlsoffset = 0
+		case sys.AMD64:
+			ctxt.Tlsoffset = (64 - 2) * 8
+		}
+
 	case objabi.Hdarwin:
 		/*
 		 * OS X system constants - offset from 0(GS) to our TLS.
